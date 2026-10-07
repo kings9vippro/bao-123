@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: alb-forge
+    env: python
+    plan: free
+    buildCommand: |
+      pip install -r requirements.txt
+      python -m playwright install chromium
+    startCommand: |
+      python -m playwright install chromium 2>/dev/null || true
+      python main.py
+    healthCheckPath: /
+    envVars:
+      - key: BOT_TOKEN
+        value: "8855930333:AAGKTuUwWY5wIKD-_5d38qRUHDiVIEPpXMY"
+      - key: DASHBOARD_KEY
+        value: "han"
+      - key: ADMIN_IDS
+        value: "6094686933"
+      - key: TZ
+        value: Asia/Ho_Chi_Minh
+      - key: PYTHON_VERSION
+        value: 3.14.3
